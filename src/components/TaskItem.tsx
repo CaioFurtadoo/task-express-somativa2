@@ -1,4 +1,5 @@
 import React from 'react';
+import { router } from 'expo-router';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Feather, AntDesign } from '@expo/vector-icons';
 import { TaskItem as TaskType } from '../utils/handle-api';
@@ -17,8 +18,11 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, updateMode }) => {
     (state) => state.deleteTask
   );
   return (
-    <View style={styles.task}>
-      <View style={styles.contentContainer}>
+      <TouchableOpacity
+        style={styles.task}
+        onPress={() => router.push(`/task/${task._id}`)}
+      >
+        <View style={styles.contentContainer}>
         <Text style={[styles.text, !!task.completed && styles.textCompleted]}>
           {task.text}
         </Text>
@@ -38,7 +42,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, updateMode }) => {
           <AntDesign name="delete" size={20} color="#fff" style={styles.icon} />
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
