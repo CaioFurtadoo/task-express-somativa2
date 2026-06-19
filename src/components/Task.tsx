@@ -10,44 +10,40 @@ interface TaskProps {
 
 const Task: React.FC<TaskProps> = ({ text, updateMode, deleteTask }) => {
   return (
-    <View style={styles.todo}>
-      <Text style={styles.text}>{text}</Text>
-      <View style={styles.icons}>
+      <View
+          className="
+              bg-white
+              rounded-xl
+              shadow
+              p-4
+              mt-4
+              flex-row
+              justify-between
+              items-center
+          "
+      >      
+      <Text
+      className="text-black text-base flex-1"
+      >
+      {text}
+      </Text>
+      <View className="flex-row gap-4">
         <TouchableOpacity onPress={updateMode}>
-          <Feather name="edit" size={20} color="#fff" style={styles.icon} />
+            <Feather
+                name="edit"
+                size={20}
+                color="black"
+            />
         </TouchableOpacity>
+
         <TouchableOpacity onPress={deleteTask}>
-          <AntDesign name="delete" size={20} color="#fff" style={styles.icon} />
+            <AntDesign
+                name="delete"
+                size={20}
+                color="red"
+            />
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  todo: {
-    backgroundColor: '#000',
-    paddingVertical: 24,
-    paddingHorizontal: 32, // Adjusted from rem
-    borderRadius: 5,
-    marginTop: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  text: {
-    color: '#fff',
-    fontSize: 16,
-    flex: 1,
-  },
-  icons: {
-    flexDirection: 'row',
-    gap: 16,
-    marginLeft: 16,
-  },
-  icon: {
-    padding: 2,
-  },
-});
-
-export default Task;

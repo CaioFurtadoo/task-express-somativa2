@@ -8,6 +8,8 @@ import { addTask, deleteTask, getAllTasks, updateTask, TaskItem } from '../../sr
 import { globalStyles } from '../../src/styles/global';
 import AboutScreen from '../../src/components/AboutScreen';
 import { useTaskStore } from '../../src/store/useTaskStore';
+import { Input, InputField } from "@/components/ui/input";
+import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 // TODO (Zustand): Importe o seu useTaskStore aqui
 
 export default function HomeScreen(){  // TODO (Zustand): Remova este useState e utilize o seletor da sua store para pegar as tasks
@@ -85,9 +87,9 @@ export default function HomeScreen(){  // TODO (Zustand): Remova este useState e
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <View style={styles.headerContainer}>
+      <SafeAreaView className="flex-1 bg-gray-100">
+        <View className="flex-1 max-w-[600px] w-full self-center px-4">
+          <View style={styles.headerContainer}>
           {logoError ? (
             <Text style={styles.header}>Gerenciador de Tarefas</Text>
           ) : (
@@ -177,13 +179,15 @@ export default function HomeScreen(){  // TODO (Zustand): Remova este useState e
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>{isUpdating ? "Editar Tarefa" : "Nova Tarefa"}</Text>
             
-            <TextInput
-              style={styles.modalInput}
-              placeholder="Nome da tarefa..."
-              value={text}
-              maxLength={50}
-              onChangeText={setText}
-            />
+            <Input>
+
+                  <InputField
+                      placeholder="Nome da tarefa..."
+                      value={text}
+                      onChangeText={setText}
+                  />
+
+              </Input>
 
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Data limite:</Text>
@@ -282,18 +286,6 @@ export default function HomeScreen(){  // TODO (Zustand): Remova este useState e
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: globalStyles.backgroundColor,
-    paddingTop: Platform.OS === 'android' ? RNStatusBar.currentHeight : 0,
-  },
-  container: {
-    flex: 1,
-    maxWidth: 600,
-    width: '100%',
-    alignSelf: 'center',
-    paddingHorizontal: 16,
-  },
   headerContainer: {
     alignItems: 'center',
     marginTop: 16,
